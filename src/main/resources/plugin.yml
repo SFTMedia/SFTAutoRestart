@@ -1,0 +1,9 @@
+name: SFTAutoRestart
+main: com.blalp.sftautorestart.SFTAutoRestart
+version: 2.0
+
+commands:
+  autorestart:
+        aliases: [autore]
+  voterestart:
+        aliases: [revote]
