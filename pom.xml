@@ -27,19 +27,28 @@
 	</properties>
 	<repositories>
 		<repository>
-		  <id>server-files</id>
-		  <url>file://${project.basedir}/libs/server-files</url>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
-		  <id>other-plugins</id>
-		  <url>file://${project.basedir}/libs/other-plugins</url>
+			<id>sponge-repo</id>
+			<name>Sponge Maven Repository</name>
+			<url>https://repo.spongepowered.org/maven</url>
 		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>org</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.7.10</version>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot</artifactId>
+			<version>1.16.2-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spongepowered</groupId>
+			<artifactId>spongeapi</artifactId>
+			<version>7.2.0</version>
+			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

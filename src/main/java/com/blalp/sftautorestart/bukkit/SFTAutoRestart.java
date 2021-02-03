@@ -1,9 +1,10 @@
-package com.blalp.sftautorestart;
+package com.blalp.sftautorestart.bukkit;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import org.apache.commons.lang3.StringUtils;
+import com.blalp.sftautorestart.common.Lag;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -44,61 +45,12 @@ public class SFTAutoRestart extends JavaPlugin {
 				}
 			}
 		},5,5);
-		/*if(!new File(this.getDataFolder().getAbsolutePath()+"config.txt").exists()){
-			try {
-				PrintWriter writer = new PrintWriter(new File(this.getDataFolder().getAbsolutePath()+"data.txt"), "UTF-8");
-				writer.println(10);
-				writer.println(5);
-				writer.println(10);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		if(!new File(this.getDataFolder().getAbsolutePath()+"data.txt").exists()){
-			try {
-				PrintWriter writer = new PrintWriter(new File(this.getDataFolder().getAbsolutePath()+"data.txt"), "UTF-8");
-				writer.println(false);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-            Scanner fileScanner = new Scanner(new File(this.getDataFolder().getAbsolutePath()+"data.txt"));
-            restartedLast=Boolean.parseBoolean(fileScanner.nextLine());
-            fileScanner.close();
-            Scanner configScanner = new Scanner(new File(this.getDataFolder().getAbsolutePath()+"config.txt"));
-            forceTimings=Boolean.parseBoolean(configScanner.nextLine());
-            tpsTriggers[0]=Integer.parseInt(configScanner.nextLine());
-            tpsTriggers[1]=Integer.parseInt(configScanner.nextLine());
-            tpsTriggers[2]=Integer.parseInt(configScanner.nextLine());
-            configScanner.close();
-            
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
 		if(restartedLast||forceTimings){
         	Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "timings on");
         }
 	}
 	@Override
 	public void onDisable(){
-		/*try {
-			PrintWriter writer = new PrintWriter(new File(this.getDataFolder().getAbsolutePath()+"data.txt"), "UTF-8");
-			if(counter>=tpsTriggers[2]&&enabled){
-				writer.println("true");
-			} else {
-				writer.println("false");
-			}
-			writer.println();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}*/
 		if(forceTimings){
 			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "timings report");
 		}
@@ -120,7 +72,7 @@ public class SFTAutoRestart extends JavaPlugin {
 				sender.sendMessage(new String[]{"[AutoRestart] enabled "+enabled,"tpsTriggers (0:tpsThreshold="+tpsTriggers[0]+",1:tpsEmergancyThreshold="+tpsTriggers[1]+",2:ticksBelowThreshold="+tpsTriggers[2]+") forceTimings "+forceTimings,"voteAllowed "+voteAllowed});
 			} else if(args.length>0&&args[0].equalsIgnoreCase("varset")&&sender.hasPermission("sftautorestart.varset")){
 				if(args.length==1){
-					sender.sendMessage("Please include valid vars. "+StringUtils.join(new String[]{"enabled","tpsTriggers","forceTimings","voteAllowed"}," "));
+					sender.sendMessage("Please include valid vars. "+StringUtilsjoin(new String[]{"enabled","tpsTriggers","forceTimings","voteAllowed"}," "));
 				} else {
 					if (args[1].equalsIgnoreCase("enabled")){
 						if(args.length>=3){
@@ -171,7 +123,7 @@ public class SFTAutoRestart extends JavaPlugin {
 							}
 						}
 					} else {
-						sender.sendMessage("Please include valid vars. "+StringUtils.join(new String[]{"enabled","tpsTriggers","forceTimings","voteAllowed"}," "));
+						sender.sendMessage("Please include valid vars. "+StringUtilsjoin(new String[]{"enabled","tpsTriggers","forceTimings","voteAllowed"}," "));
 					}
 				}
 			} else {
@@ -185,7 +137,7 @@ public class SFTAutoRestart extends JavaPlugin {
 	private static void restartServer() {
 		try {
 			Bukkit.getLogger().log(Level.WARNING, "[SFTAutoRestart] Restarting server!");
-			Bukkit.getServer().broadcastMessage("[SFTAutoRestart] §7Restarting server!");
+			Bukkit.getServer().broadcastMessage("[SFTAutoRestart] ï¿½7Restarting server!");
 			if(restartedLast||forceTimings){
 				Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "timings report");
 			}
@@ -220,6 +172,19 @@ public class SFTAutoRestart extends JavaPlugin {
 				}
 			}
 		};
+	}
+	public static String StringUtilsjoin(String[] args,String sep){
+		boolean first = true;
+		String output = "";
+		for (String arg:args){
+			if(first) {
+				first=false;
+			} else {
+				output +=sep;
+			}
+			output+=arg;
+		}
+		return output;
 	}
 	public static void handleRestart(Player sender,String[] args){
 		if(args.length==0){
@@ -275,4 +240,5 @@ public class SFTAutoRestart extends JavaPlugin {
 			sender.sendMessage(new String[]{"-----[AutoRestart]------","Too man args.","/voterestart - Votes for a restart","/voterestart no - sets your vote to no.","/voterestart yes - sets your vote to yes."});
 		}
 	}
+
 }
