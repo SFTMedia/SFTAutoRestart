@@ -1,6 +1,6 @@
 name: SFTAutoRestart
 main: com.blalp.sftautorestart.SFTAutoRestart
-version: 2.0.3
+version: 2.0.4
 
 commands:
   autorestart:

@@ -32,7 +32,7 @@ import org.spongepowered.api.text.Text;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.3", description = "Vote and Autorestart.")
+@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.4", description = "Vote and Autorestart.")
 public class SFTAutoRestart implements CommandExecutor {
 	// thanks to
 	// https://github.com/FuzzyWuzzie/SimpleRestart/blob/master/src/main/java/com/hamaluik/SimpleRestart/SimpleRestart.java
@@ -246,7 +246,12 @@ public class SFTAutoRestart implements CommandExecutor {
 	
     @Override
     public CommandResult execute(CommandSource src, CommandContext context) throws CommandException {
-		String[] args = context.<String>getOne(Text.of("args")).get().split(" ");
+		String[] args;
+		if(context.hasAny("args")) {
+			args = context.<String>getOne(Text.of("args")).get().split(" ");
+		} else {
+			args = new String[]{};
+		}
 		CommandSource sender = src.getCommandSource().get();
 		if(args.length>0&&args[0].equalsIgnoreCase("toggle")&&sender.hasPermission("sftautorestart.toggle")){
 			if(enabled){
@@ -316,7 +321,7 @@ public class SFTAutoRestart implements CommandExecutor {
 			}
 		} else {
 			if(sender.hasPermission("sftautorestart.help")){
-				sender.sendMessage(Text.of("------[AutoRestart]------","/autorestart vars - gets vars.","/autorestart varset [Var] [value]- sets var.","/autorestart toggle - toggles whether the plugin does anything or not."));
+				sender.sendMessage(Text.of("------[AutoRestart]------\n","/autorestart vars - gets vars.\n","/autorestart varset [Var] [value]- sets var.\n","/autorestart toggle - toggles whether the plugin does anything or not.\n"));
 			}
 		}
 		return CommandResult.success();
