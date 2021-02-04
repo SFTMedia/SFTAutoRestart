@@ -20,7 +20,7 @@ public class VoteRestartCommand implements CommandExecutor {
 			if(context.hasAny("args")) {
 				args = context.<String>getOne(Text.of("args")).get().split(" ");
 			} else {
-				args = new String[]{};
+				args = new String[]{"true"};
 			}
 			SFTAutoRestart.handleRestart((Player)src.getCommandSource().get(), args);
 		}
