@@ -32,7 +32,7 @@ import org.spongepowered.api.text.Text;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.2", description = "Vote and Autorestart.")
+@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.3", description = "Vote and Autorestart.")
 public class SFTAutoRestart implements CommandExecutor {
 	// thanks to
 	// https://github.com/FuzzyWuzzie/SimpleRestart/blob/master/src/main/java/com/hamaluik/SimpleRestart/SimpleRestart.java
@@ -75,9 +75,9 @@ public class SFTAutoRestart implements CommandExecutor {
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
-        Builder myCommandSpec = CommandSpec.builder().permission("sftautorestart.vote").executor(new VoteRestartCommand()).arguments(GenericArguments.remainingRawJoinedStrings(Text.of("args")));
+        Builder myCommandSpec = CommandSpec.builder().permission("sftautorestart.vote").executor(new VoteRestartCommand()).arguments(GenericArguments.optional(GenericArguments.remainingRawJoinedStrings(Text.of("args"))));
 		Sponge.getCommandManager().register(this, myCommandSpec.build(), "voterestart");
-        myCommandSpec = CommandSpec.builder().permission("sftautorestart.admin").executor(new VoteRestartCommand()).arguments(GenericArguments.remainingRawJoinedStrings(Text.of("args")));
+        myCommandSpec = CommandSpec.builder().permission("sftautorestart.admin").executor(this).arguments(GenericArguments.optional(GenericArguments.remainingRawJoinedStrings(Text.of("args"))));
 		Sponge.getCommandManager().register(this, myCommandSpec.build(), "autorestart");
 		enabled = configRoot.getNode("enabled").getBoolean();
 		voteAllowed = configRoot.getNode("voteAllowed").getBoolean();
