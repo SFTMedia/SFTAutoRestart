@@ -32,7 +32,7 @@ import org.spongepowered.api.text.Text;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.4", description = "Vote and Autorestart.")
+@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.5", description = "Vote and Autorestart.")
 public class SFTAutoRestart implements CommandExecutor {
 	// thanks to
 	// https://github.com/FuzzyWuzzie/SimpleRestart/blob/master/src/main/java/com/hamaluik/SimpleRestart/SimpleRestart.java
@@ -214,7 +214,7 @@ public class SFTAutoRestart implements CommandExecutor {
 				restartServer();
 			}
 		} else {
-			sender.sendMessage(Text.of("-----[AutoRestart]------","Too man args.","/voterestart - Votes for a restart","/voterestart no - sets your vote to no.","/voterestart yes - sets your vote to yes."));
+			sender.sendMessage(Text.of("-----[AutoRestart]------\n","Too man args.","/voterestart - Votes for a restart\n","/voterestart no - sets your vote to no.\n","/voterestart yes - sets your vote to yes."));
 		}
 	}
     
@@ -262,7 +262,7 @@ public class SFTAutoRestart implements CommandExecutor {
 			}
 			sender.sendMessage(Text.of("[AutoRestart] Plugin enabled? "+enabled));
 		} else if (args.length>0&&args[0].equalsIgnoreCase("vars")&&sender.hasPermission("sftautorestart.vars")){
-			sender.sendMessage(Text.of("[AutoRestart] enabled "+enabled,"tpsTriggers (0:tpsThreshold="+SFTAutoRestart.tpsTriggers[0]+",1:tpsEmergancyThreshold="+tpsTriggers[1]+",2:ticksBelowThreshold="+tpsTriggers[2]+") forceTimings "+forceTimings,"voteAllowed "+voteAllowed));
+			sender.sendMessage(Text.of("[AutoRestart] enabled "+enabled,"tpsTriggers (\ntpsThreshold="+SFTAutoRestart.tpsTriggers[0]+",\ntpsEmergancyThreshold="+tpsTriggers[1]+",\nticksBelowThreshold="+tpsTriggers[2]+")\n forceTimings "+forceTimings,"\nvoteAllowed "+voteAllowed));
 		} else if(args.length>0&&args[0].equalsIgnoreCase("varset")&&sender.hasPermission("sftautorestart.varset")){
 			if(args.length==1){
 				sender.sendMessage(Text.of("Please include valid vars. "+StringUtilsjoin(new String[]{"enabled","tpsTriggers","forceTimings","voteAllowed"}," ")));
