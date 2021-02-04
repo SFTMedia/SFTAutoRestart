@@ -32,7 +32,7 @@ import org.spongepowered.api.text.Text;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.5", description = "Vote and Autorestart.")
+@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.6", description = "Vote and Autorestart.")
 public class SFTAutoRestart implements CommandExecutor {
 	// thanks to
 	// https://github.com/FuzzyWuzzie/SimpleRestart/blob/master/src/main/java/com/hamaluik/SimpleRestart/SimpleRestart.java

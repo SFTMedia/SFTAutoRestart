@@ -14,9 +14,15 @@ import org.spongepowered.api.text.Text;
 public class VoteRestartCommand implements CommandExecutor {
 
     @Override
-    public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+    public CommandResult execute(CommandSource src, CommandContext context) throws CommandException {
 		if(src.getCommandSource().get() instanceof Player){
-			SFTAutoRestart.handleRestart((Player)src.getCommandSource().get(), args.<String>getOne(Text.of("args")).get().split(" "));
+			String[] args;
+			if(context.hasAny("args")) {
+				args = context.<String>getOne(Text.of("args")).get().split(" ");
+			} else {
+				args = new String[]{};
+			}
+			SFTAutoRestart.handleRestart((Player)src.getCommandSource().get(), args);
 		}
 		return CommandResult.success();
     }
