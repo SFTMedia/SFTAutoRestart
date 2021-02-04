@@ -32,7 +32,7 @@ import org.spongepowered.api.text.Text;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.6", description = "Vote and Autorestart.")
+@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.7-dev", description = "Vote and Autorestart.")
 public class SFTAutoRestart implements CommandExecutor {
 	// thanks to
 	// https://github.com/FuzzyWuzzie/SimpleRestart/blob/master/src/main/java/com/hamaluik/SimpleRestart/SimpleRestart.java
@@ -225,6 +225,10 @@ public class SFTAutoRestart implements CommandExecutor {
 				SFTAutoRestart.handleRestart(event.getCause().first(Player.class).get(),new String[]{});
 			} else if (event.getMessage().toPlain().equalsIgnoreCase("don't restart")){
 				SFTAutoRestart.handleRestart(event.getCause().first(Player.class).get(), new String[]{"false"});
+			} else {
+				System.out.println(event.getOriginalMessage().toPlain());
+				System.out.println(event.getMessage().toPlain());
+				System.out.println(event.getRawMessage().toPlain());
 			}
 		}
     }
