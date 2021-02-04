@@ -32,7 +32,7 @@ import org.spongepowered.api.text.Text;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.1", description = "Vote and Autorestart.")
+@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.2", description = "Vote and Autorestart.")
 public class SFTAutoRestart implements CommandExecutor {
 	// thanks to
 	// https://github.com/FuzzyWuzzie/SimpleRestart/blob/master/src/main/java/com/hamaluik/SimpleRestart/SimpleRestart.java
@@ -70,7 +70,7 @@ public class SFTAutoRestart implements CommandExecutor {
 		try {
 			configRoot = configManager.load();
 			if(!defaultConfig.toFile().exists()){
-				Sponge.getAssetManager().getAsset(this, "default.conf").get().copyToFile(new File(defaultConfig.toAbsolutePath().toString(),"sftautorestart.conf").toPath());
+				Sponge.getAssetManager().getAsset(this, "default.conf").get().copyToFile(defaultConfig);
 			}
 		} catch (IOException exception) {
 			exception.printStackTrace();
