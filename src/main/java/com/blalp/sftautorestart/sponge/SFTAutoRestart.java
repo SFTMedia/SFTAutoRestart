@@ -1,5 +1,6 @@
 package com.blalp.sftautorestart.sponge;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -28,12 +29,10 @@ import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginManager;
 import org.spongepowered.api.text.Text;
 
-import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0", description = "Vote and Autorestart.")
+@Plugin(id = "sftautorestart", name = "SFTAutoRestart", version = "2.0.1", description = "Vote and Autorestart.")
 public class SFTAutoRestart implements CommandExecutor {
 	// thanks to
 	// https://github.com/FuzzyWuzzie/SimpleRestart/blob/master/src/main/java/com/hamaluik/SimpleRestart/SimpleRestart.java
@@ -48,11 +47,11 @@ public class SFTAutoRestart implements CommandExecutor {
 	public static ArrayList<Player> playersVoted = new ArrayList<Player>();
 
 	@Inject
-	@DefaultConfig(sharedRoot = true)
+	@DefaultConfig(sharedRoot = false)
 	private Path defaultConfig;
 
 	@Inject
-	@DefaultConfig(sharedRoot = true)
+	@DefaultConfig(sharedRoot = false)
 	private ConfigurationLoader<CommentedConfigurationNode> configManager;
 	private CommentedConfigurationNode configRoot;
 
@@ -70,11 +69,9 @@ public class SFTAutoRestart implements CommandExecutor {
 		loggerInstance = logger;
 		try {
 			configRoot = configManager.load();
-			configRoot
-					.mergeValuesFrom(HoconConfigurationLoader
-							.builder().setURL(pluginManager.getPlugin("sftautorestart").orElse(null)
-									.getAsset("default.conf").get().getUrl())
-							.build().load(ConfigurationOptions.defaults()));
+			if(!defaultConfig.toFile().exists()){
+				Sponge.getAssetManager().getAsset(this, "default.conf").get().copyToFile(new File(defaultConfig.toAbsolutePath().toString(),"sftautorestart.conf").toPath());
+			}
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
