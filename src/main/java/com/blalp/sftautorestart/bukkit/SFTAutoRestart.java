@@ -37,14 +37,14 @@ public class SFTAutoRestart extends JavaPlugin {
 	    Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Lag(), 100L, 1L);
 	    Bukkit.getPluginManager().registerEvents(new BukkitListeners(), this);
 		Bukkit.getScheduler().runTaskTimerAsynchronously(this, scheduling(),5,5);
-		Bukkit.getScheduler().runTaskTimer(this, new BukkitRunnable() {
+		new BukkitRunnable() {
 			@Override
 			public void run() {
 				if(restart){
 					restartServer();
 				}
 			}
-		},5,5);
+		}.runTaskTimer(this, 5, 5);
 		if(restartedLast||forceTimings){
         	Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "timings on");
         }
