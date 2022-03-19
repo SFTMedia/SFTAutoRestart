@@ -3,11 +3,10 @@
 
 <groupId>com.blalp</groupId>
 <artifactId>sftautorestart</artifactId>
-<version>2.0.10</version>
+<version>2.0.11-1.6.4</version>
 <packaging>jar</packaging>
 
 <name>SFTAutoRestart</name>
-
 	<build>
 		<plugins>
 			<plugin>	
@@ -15,8 +14,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -25,30 +24,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<repositories>
-		<repository>
-			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-		</repository>
-		<repository>
-			<id>sponge-repo</id>
-			<name>Sponge Maven Repository</name>
-			<url>https://repo.spongepowered.org/maven</url>
-		</repository>
-	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot</artifactId>
-			<version>1.16.2-R0.1-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.spongepowered</groupId>
-			<artifactId>spongeapi</artifactId>
-			<version>7.2.0</version>
-			<type>jar</type>
-			<scope>provided</scope>
+			<groupId>org</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.6.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/bTeam.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>

@@ -118,7 +118,7 @@ public class SFTAutoRestart extends JavaPlugin {
 							getConfig().set("voteAllowed", voteAllowed);
 							saveConfig();
 							sender.sendMessage("[AutoRestart] Set voteAllowed to: "+voteAllowed);
-							if(Bukkit.getOnlinePlayers().size()==playersVoted.size()&&voteAllowed){
+							if(Bukkit.getOnlinePlayers().length==playersVoted.size()&&voteAllowed){
 								restartServer();
 							}
 						}
@@ -207,11 +207,11 @@ public class SFTAutoRestart extends JavaPlugin {
 						restartServer();
 					}
 				}
-				if(Bukkit.getOnlinePlayers().size()==playersVoted.size()&&voteAllowed){
+				if(Bukkit.getOnlinePlayers().length==playersVoted.size()&&voteAllowed){
 					restartServer();
 				}
 			}
-			if(Bukkit.getOnlinePlayers().size()==playersVoted.size()&&voteAllowed){
+			if(Bukkit.getOnlinePlayers().length==playersVoted.size()&&voteAllowed){
 				restartServer();
 			}
 			sender.sendMessage("[AutoRestart] Added your vote");
@@ -223,7 +223,7 @@ public class SFTAutoRestart extends JavaPlugin {
 			boolean found=false;
 			for(Player player:playersVoted){
 				if(player.getUniqueId().equals(((Player)sender).getUniqueId())){
-					if(Bukkit.getOnlinePlayers().size()==playersVoted.size()&&voteAllowed){
+					if(Bukkit.getOnlinePlayers().length==playersVoted.size()&&voteAllowed){
 						restartServer();
 					}
 					found=true;
@@ -233,7 +233,7 @@ public class SFTAutoRestart extends JavaPlugin {
 				playersVoted.add(((Player)sender));
 				sender.sendMessage("[AutoRestart] Added your vote");
 			}
-			if(Bukkit.getOnlinePlayers().size()==playersVoted.size()&&voteAllowed){
+			if(Bukkit.getOnlinePlayers().length==playersVoted.size()&&voteAllowed){
 				restartServer();
 			}
 		} else {
