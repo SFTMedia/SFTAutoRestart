@@ -75,7 +75,7 @@ public class SFTAutoRestart extends JavaPlugin {
 					sender.sendMessage("Please include valid vars. "+StringUtilsjoin(new String[]{"enabled","tpsTriggers","forceTimings","voteAllowed"}," "));
 				} else {
 					if (args[1].equalsIgnoreCase("enabled")){
-						if(args.length>=3){
+						if(args.length>3){
 							sender.sendMessage("[AutoRestart] Too many args, please just put true or false after enabled.");
 						} else {
 							enabled=Boolean.parseBoolean(args[2]);
